@@ -1,0 +1,27 @@
+name: CI-Build-Dev
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: |
+          docker build -t tamatini/devops-lessons-backend .
+        
+      - name: Add tag to docker image
+        run: |
+          docker tag tamatini/devops-lessons-backend tamatini/devops-lessons-backend:{MAJOR_VERSION}.{MINOR_VERSION}.{GITHUB_RUN_NUMBER}
+
+      - name: Push docker image to docker hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push tamatini/devops-lessons-backend:{MAJOR_VERSION}.{MINOR_VERSION}.{GITHUB_RUN_NUMBER}
