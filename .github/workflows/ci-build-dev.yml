@@ -19,7 +19,7 @@ jobs:
         
       - name: Add tag to docker image
         run: |
-          docker tag tamatini/devops-lessons-backend tamatini/devops-lessons-backend:${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${GITHUB_RUN_NUMBER}
+          docker tag tamatini/devops-lessons-backend tamatini/devops-lessons-backend:${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
 
       - name: Push docker image to docker hub
         run: |
