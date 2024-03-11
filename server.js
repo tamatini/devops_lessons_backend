@@ -1,6 +1,6 @@
 const app = require("./app");
 const dotenv = require("dotenv");
-const PORT = dotenv.config().parsed.LOCAL_PORT || 5000;
+const PORT = 3000;
 
 const start = () => {
     app.listen(PORT, () => {

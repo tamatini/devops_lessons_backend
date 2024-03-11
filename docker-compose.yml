@@ -1,0 +1,22 @@
+services:
+  devops_lessons_backend:
+    image: tamatini/devops-lessons-backend:1.2.6
+    ports:
+      - "3000:3000"
+
+  mongo:
+    restart: on-failure
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+  mongo-express:
+    restart: on-failure
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017
