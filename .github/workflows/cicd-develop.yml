@@ -8,6 +8,7 @@ on:
 jobs:
   build-dev-image:
     runs-on: ubuntu-latest
+    name: Build and push docker image to docker hub
 
     steps:
       - name: Checkout
@@ -40,6 +41,8 @@ jobs:
 
   create-docker-compose:
     runs-on: ubuntu-latest
+    name: Create docker-compose.yml file
+    needs: build-dev-image
 
     steps:
       - name: Checkout
