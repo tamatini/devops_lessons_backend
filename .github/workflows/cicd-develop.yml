@@ -63,7 +63,7 @@ jobs:
           template="./github/templates/docker-compose.yml"
           output="./docker-compose.yml"
 
-          SED -e "s/\${BACKEND_VERSION}/$tag/" \
+          sed -e "s/\${BACKEND_VERSION}/$tag/" \
           $template > $output
 
       - name: Push to repository
