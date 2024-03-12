@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: tag
-          path: artifact/
+          path: artifact/tag
 
   create-docker-compose:
     runs-on: ubuntu-latest
