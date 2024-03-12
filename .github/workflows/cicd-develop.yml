@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  build:
+  build-dev-image:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,3 +37,32 @@ jobs:
         with:
           name: tag
           path: artifact/
+
+  create-docker-compose:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tag
+
+      - name: Build docker image with tag
+        run: |
+          tag=$(cat artifact/tag)
+          template="./github/templates/docker-compose.yml"
+          output="./docker-compose.yml"
+
+          SED -e "s/\${BACKEND_VERSION}/$tag/" \
+          $template > $output
+
+      - name: Push to repository
+        run: |
+          git config --global ${{ vars.email }}
+          git config --global user.name ${{ vars.username }}
+          git add .
+          git commit -m "Update docker-compose.yml with new tag"
+          git push
