@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: tag
-          path: artifact/tag
+          path: artifact/
 
   create-docker-compose:
     runs-on: ubuntu-latest
@@ -53,9 +53,13 @@ jobs:
         with:
           name: tag
 
+      - name: test artifact download
+        run: |
+          ls -R
+
       - name: Build docker image with tag
         run: |
-          tag=$(cat artifact/tag)
+          tag=$(cat tag)
           template="./github/templates/docker-compose.yml"
           output="./docker-compose.yml"
 
