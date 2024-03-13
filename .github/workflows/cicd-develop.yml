@@ -60,7 +60,6 @@ jobs:
       - name: Build docker image with tag
         run: |
           tag=$(cat tag)
-          ls -R .github
           template=".github/templates/docker-compose.template"
           output="./docker-compose.yml"
 
@@ -69,7 +68,7 @@ jobs:
 
       - name: Push to repository
         run: |
-          git config --global ${{ vars.email }}
+          git config --global user.email ${{ vars.email }}
           git config --global user.name ${{ vars.username }}
           git add .
           git commit -m "Update docker-compose.yml with new tag"
