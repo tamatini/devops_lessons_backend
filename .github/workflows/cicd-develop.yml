@@ -60,7 +60,9 @@ jobs:
       - name: Build docker image with tag
         run: |
           tag=$(cat tag)
-          template="./github/templates/docker-compose.template"
+          cat=".github"
+          ls -R develop/.github/
+          template=".github/templates/docker-compose.template"
           output="./docker-compose.yml"
 
           sed -e "s/\${BACKEND_VERSION}/$tag/" \
