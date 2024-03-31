@@ -19,4 +19,14 @@ describe('GET /lessons', () => {
         const res = await request(app).get(url);
         expect(res.body).to.have.property('message', 'Hello from the lesson controller!');
     });
+
+    it ('should return a list of lessons', async() => {
+        const res = await request(app).get(url); 
+        expect(res.body).to.be.an('array');
+    });
+
+    it ('array should contain a lesson object', async() => {
+        const res = await request(app).get(url);
+        expect(res.body[0]).to.be.an('object');
+    });
 });
