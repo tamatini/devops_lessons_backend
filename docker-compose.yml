@@ -1,6 +1,6 @@
 services:
   devops_lessons_backend:
-    image: tamatini/devops-lessons-backend:1.0.138
+    image: tamatini/devops-lessons-backend:1.0.139
     ports:
       - "3000:3000"
 
