@@ -5,7 +5,7 @@ const { setup, postLesson } = require('../test-helper');
 
 const url = "/lesson";
 
-describe('GET /lessons', () => {
+describe('GET /lesson', () => {
     setup();
 
     it ('should return a json response', async() => {

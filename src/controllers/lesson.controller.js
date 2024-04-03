@@ -13,8 +13,18 @@ const getLessons = async (req, res) => {
     }
 }
 
+const getSingleLesson = async (req, res) => {
+    try {
+        const lesson = await Lessons.findById(req.params.id);
+        res.status(200).json(lesson);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
     helloLesson,
-    getLessons
+    getLessons,
+    getSingleLesson
 }
