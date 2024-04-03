@@ -21,9 +21,6 @@ const connect = async (db, name) => {
 const close = async () => {
   mongoose.connection
     .close()
-    .then(() => {
-      console.log("Connection to database closed");
-    })
     .catch((err) => {
       console.error(`Error closing database connection: ${err}`);
     });
