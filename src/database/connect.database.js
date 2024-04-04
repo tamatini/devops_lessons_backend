@@ -1,20 +1,13 @@
 const mongoose = require("mongoose");
 
-const connect = async (db, name) => {
-  const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  };
-
+const connect = async (dbName, address, username, password, port) => {
   mongoose
-    .connect(db, options)
+    .connect("mongodb://"+ username + ":" + password + "@" + address + ":" + port + "/" + dbName)
     .then(() => {
-      console.log(`Connected to ${name} database`);
+      console.log(`Connected to ${dbName} database`);
     })
     .catch((err) => {
-      console.error(`Error connecting to ${name} database: ${err}`);
+      console.error(`Error connecting to ${dbName} database: ${err}`);
     });
 };
 
