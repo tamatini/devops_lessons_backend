@@ -7,7 +7,7 @@ const start = () => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-  database.connect("lesson", "localhost", "admin", "password", "8081");
+  database.connect("lesson", "localhost", "admin", "password", "27017");
 };
 
 if (require.main === module) {
