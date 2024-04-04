@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const connect = async (dbName, address, username, password, port) => {
+const connect = async (MONGO_URL, MONGO_DB) => {
   mongoose
-    .connect("mongodb://"+ username + ":" + password + "@" + address + ":" + port + "/" + dbName)
+    .connect(MONGO_URL + "/" + MONGO_DB)
     .then(() => {
-      console.log(`Connected to ${dbName} database`);
+      console.log(`Connected to ${MONGO_DB} database`);
     })
     .catch((err) => {
-      console.error(`Error connecting to ${dbName} database: ${err}`);
+      console.error(`Error connecting to ${MONGO_DB} database: ${err}`);
     });
 };
 

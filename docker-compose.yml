@@ -3,6 +3,9 @@ services:
     image: tamatini/devops-lessons-backend:1.0.223
     ports:
       - "3000:3000"
+    environment:
+      MONGO_URL: mongodb://admin:password@mongo:27017
+      MONGO_DB: lessons
 
   mongo:
     restart: on-failure
