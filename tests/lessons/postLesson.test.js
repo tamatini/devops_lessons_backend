@@ -3,7 +3,7 @@ const request = require("supertest");
 const app = require("../../app");
 const { setup, postLesson } = require("../test-helper");
 
-const url = "/lesson";
+const url = "/lesson/new";
 
 describe("POST /lesson", () => {
   setup();

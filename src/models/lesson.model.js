@@ -17,8 +17,12 @@ const lessonSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
+}, {
+    timestamps: true
 });
 
 const Lesson = mongoose.model('Lesson', lessonSchema);
+
+
 
 module.exports = Lesson;
