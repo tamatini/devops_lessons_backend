@@ -5,5 +5,6 @@ Router.get("/", lessonController.getLessons);
 Router.post("/", lessonController.postLesson);
 Router.get("/hello", lessonController.helloLesson);
 Router.get("/:id", lessonController.getSingleLesson);
+Router.put("/:id", lessonController.updateLesson);
 
 module.exports = Router;

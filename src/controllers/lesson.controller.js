@@ -58,9 +58,45 @@ const postLesson = async (req, res) => {
   }
 };
 
+const updateLesson = async (req, res) => {
+  try {
+    const body = req.body;
+
+    if (!body.title || body.title === "") {
+      return res.status(400).json({
+        message: "Title is required",
+      });
+    }
+
+    if (!body.content || body.content === "") {
+      return res.status(400).json({
+        message: "Content is required",
+      });
+    }
+
+    if (body.isPublished === undefined) {
+      return res.status(400).json({
+        message: "Lesson must be published or not",
+      });
+    }
+
+    const lesson = await Lessons.findById(req.params.id);
+    lesson.title = req.body.title;
+    lesson.content = req.body.content;
+    lesson.isPublished = req.body.isPublished;
+    await lesson.save();
+    res.status(200).json({ message: "Lesson updated" });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   helloLesson,
   getLessons,
   getSingleLesson,
   postLesson,
+  updateLesson
 };
