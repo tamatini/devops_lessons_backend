@@ -93,10 +93,22 @@ const updateLesson = async (req, res) => {
   }
 }
 
+const deleteLesson = async (req, res) => {
+  try {
+    await Lessons.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Lesson deleted" });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   helloLesson,
   getLessons,
   getSingleLesson,
   postLesson,
-  updateLesson
+  updateLesson,
+  deleteLesson,
 };

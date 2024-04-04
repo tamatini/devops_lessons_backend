@@ -6,5 +6,6 @@ Router.post("/", lessonController.postLesson);
 Router.get("/hello", lessonController.helloLesson);
 Router.get("/:id", lessonController.getSingleLesson);
 Router.put("/:id", lessonController.updateLesson);
+Router.delete("/:id", lessonController.deleteLesson);
 
 module.exports = Router;
