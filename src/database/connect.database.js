@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connect = async (MONGO_URL, MONGO_DB) => {
+const connect = async (MONGO_DB, MONGO_URL) => {
   mongoose
     .connect(MONGO_URL + "/" + MONGO_DB)
     .then(() => {
