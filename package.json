@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
-    "test": "mocha --recursive --exit --timeout 10000 tests"
+    "test": "mocha --recursive --exit --timeout 10000 tests",
+    "test-coverage": "nyc --reporter=text mocha --recursive --exit --timeout 10000 tests"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "supertest": "^6.3.4"
   },
   "devDependencies": {
-    "mongodb-memory-server": "^9.1.6"
+    "mongodb-memory-server": "^9.1.6",
+    "nyc": "^15.1.0"
   }
 }

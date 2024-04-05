@@ -15,7 +15,7 @@ describe('DELETE /lesson/delete/:id', () => {
     });
 
     it ('should return a status code 404 if lesson not found', async() => {
-        const res = await request(app).delete(url+"/delete?id=123456789012345678901234");
+        const res = await request(app).delete(url+"/delete/123456789012345678901234");
         expect(res.statusCode).to.equal(404);
     });
 
