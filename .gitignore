@@ -4,3 +4,7 @@ node_modules
 .env
 .nyc_output
 .nyc_output/*
+logs/access.log logs/error.log logs/stdout.log
+logs/stdout.log
+logs/error.log
+logs/access.log
