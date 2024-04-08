@@ -3,9 +3,9 @@ const request = require('supertest');
 const app = require('../../app');
 const { setup, postLesson } = require('../test-helper');
 
-const url = "/lesson/delete/";
+const url = "/lessons/delete/";
 
-describe('DELETE /lesson/delete/:id', () => {
+describe('DELETE /lessons/delete/:id', () => {
     setup();
 
     it ('should return a status code 200', async() => {
