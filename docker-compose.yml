@@ -3,7 +3,7 @@ services:
     depends_on:
       mongo:
         condition: service_started
-    image: tamatini/devops-lessons-backend:1.0.228
+    image: tamatini/devops-lessons-backend:1.0.229
     ports:
       - 3000:3000
     environment:
