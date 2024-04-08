@@ -3,7 +3,13 @@ const mongoose = require("mongoose");
 const connect = async (db, name) => {
   console.log("database url: ", db)
   mongoose
-    .connect(db)
+    .connect(db, {
+      dbName: name,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    })
     .then(() => {
       console.log(`Connected to ${name} database`);
     })

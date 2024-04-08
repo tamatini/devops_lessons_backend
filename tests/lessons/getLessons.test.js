@@ -3,9 +3,9 @@ const request = require("supertest");
 const app = require("../../app");
 const { setup, postLesson } = require("../test-helper");
 
-const url = "/lesson";
+const url = "/lessons";
 
-describe("GET /lesson", () => {
+describe("GET /lessons", () => {
   setup();
 
   it("should return a list of lessons", async () => {

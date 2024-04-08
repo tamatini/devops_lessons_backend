@@ -3,9 +3,9 @@ const request = require('supertest');
 const app = require('../../app');
 const { setup, postLesson } = require('../test-helper');
 
-const url = "/lesson";
+const url = "/lessons";
 
-describe("GET /lesson/:id", () => {
+describe("GET /lessons/:id", () => {
     setup();
 
     it ('should return status code 200', async() => {
