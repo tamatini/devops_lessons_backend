@@ -4,6 +4,7 @@ const routes = require("./src/routes/routes");
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
+const { env } = require("process");
 
 const app = express();
 
@@ -12,9 +13,11 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "logs/access.l
 const stdoutLogStream = fs.createWriteStream(path.join(__dirname, "logs/stdout.log"), { flags: "a" });
 const errorLogStream = fs.createWriteStream(path.join(__dirname, "logs/error.log"), { flags: "a" });
 app.use(morgan("common", { stream: accessLogStream }));
-process.stdout.write = stdoutLogStream.write.bind(stdoutLogStream);
-process.stderr.write = errorLogStream.write.bind(errorLogStream);
 
+if (env.NODE_ENV === "production") {
+    process.stdout.write = stdoutLogStream.write.bind(stdoutLogStream);
+    process.stderr.write = errorLogStream.write.bind(errorLogStream);
+}
 
 // Origin configuration
 app.use(cors());

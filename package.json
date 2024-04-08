@@ -4,8 +4,8 @@
   "description": "This is the backend for AFPA DevOps Course",
   "main": "server.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon .",
+    "start": "NODE_ENV=production node .",
+    "dev": "NODE_ENV=development nodemon .",
     "test": "mocha --recursive --exit --timeout 10000 tests",
     "test-coverage": "nyc --reporter=text mocha --recursive --exit --timeout 10000 tests"
   },
