@@ -21,6 +21,6 @@ const lessonSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Lesson = mongoose.model('lessons', lessonSchema);
+const Lesson = mongoose.model('Lesson', lessonSchema);
 
 module.exports = Lesson;
