@@ -8,7 +8,7 @@ const start = () => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-  database.connect(MONGO_DB, MONGO_URL);
+  database.connect(MONGO_URL, MONGO_DB);
 };
 
 if (require.main === module) {
