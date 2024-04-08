@@ -9,9 +9,9 @@ const { env } = require("process");
 const app = express();
 
 // Logging configuration
-const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" });
-const stdoutLogStream = fs.createWriteStream(path.join(__dirname, "stdout.log"), { flags: "a" });
-const errorLogStream = fs.createWriteStream(path.join(__dirname, "error.log"), { flags: "a" });
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "logs/access.log"), { flags: "a" });
+const stdoutLogStream = fs.createWriteStream(path.join(__dirname, "logs/stdout.log"), { flags: "a" });
+const errorLogStream = fs.createWriteStream(path.join(__dirname, "logs/error.log"), { flags: "a" });
 
 if (env.NODE_ENV === "production") {
     app.use(morgan("common", { stream: accessLogStream }));
