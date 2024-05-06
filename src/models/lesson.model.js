@@ -1,13 +1,14 @@
+const { status } = require('express/lib/response');
 const { mongoose} = require('mongoose');
 
 const lessonSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: [true, 'Title is required', 400]
     },
     content: {
         type: String,
-        required: true
+        required: [true, 'Content is required']
     },
     isPublished: {
         type: Boolean,

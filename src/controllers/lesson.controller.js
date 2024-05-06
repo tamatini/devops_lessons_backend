@@ -21,10 +21,11 @@ const getSingleLesson = async (req, res) => {
 const postLesson = async (req, res) => {
   try {
     const body = req.body;
-    const error = checkLesson(body);
-    if (error !== null) {
+    const validateLesson = await Lessons.validate(body);
+    if (validateLesson.error) {
+      console.log(validateLesson.error);
       return res.status(400).json({
-        message: error,
+        message: validateLesson.error.details[0].message,
       });
     } else {
       const newLesson = new Lessons({
@@ -35,6 +36,27 @@ const postLesson = async (req, res) => {
       await newLesson.save();
       res.status(201).json(newLesson);
     }
+
+
+
+
+
+
+
+    // const error = checkLesson(body);
+    // if (error !== null) {
+    //   return res.status(400).json({
+    //     message: error,
+    //   });
+    // } else {
+    //   const newLesson = new Lessons({
+    //     title: req.body.title,
+    //     content: req.body.content,
+    //     isPublished: req.body.isPublished,
+    //   });
+    //   await newLesson.save();
+    //   res.status(201).json(newLesson);
+    // }
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -73,7 +95,6 @@ const deleteLesson = async (req, res) => {
         message: "Lesson not found",
       });
     }
-
     await Lessons.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Lesson deleted" });
   } catch (error) {
