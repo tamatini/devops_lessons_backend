@@ -1,4 +1,5 @@
 const { mongoose } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -35,13 +36,11 @@ const userSchema = new mongoose.Schema({
 })
 
 
-userSchema.methods.hashPassword = async (password) => {
-    try {
-        return await bcrypt.hash(password, 10);
-    } catch (error) {
-        throw new Error('Hashing failed', error);
-    }
-}
+userSchema.pre('save', async function save() {
+    const salted = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salted);
+    this.password = await hashedPassword;
+})
 
 userSchema.methods.comparePassword = async (password, hashedPassword) => {
     try {

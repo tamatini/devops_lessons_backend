@@ -1,5 +1,6 @@
 const database = require('../src/database/connect.database');
 const Lesson = require('../src/models/lesson.model');
+const User = require('../src/models/user.model');
 
 const setup = () => {
     before(async () => {
@@ -26,19 +27,41 @@ const setup = () => {
             console.error(`Error closing database connection: ${error}`);
         }
     })
+};
+
+const postLesson = async (lesson) => {
+    try {
+        const newLesson = new Lesson({
+            title: lesson,
+            content: 'This is a test lesson',
+            isPublished: false
+        });
+        return await newLesson.save();
+
+    } catch (error) {
+        console.error(`Error posting lesson: ${error}`);
+    }
 }
 
-postLesson = async (lesson) => {
-    const newLesson = new Lesson({
-        title: lesson,
-        content: 'This is a test lesson',
-        isPublished: false
-    });
+const postUser = async () => {
+    try {
+        const newUser = new User({
+            username: 'JohnDoe',
+            email: 'john.doe@mail.fr',
+            password: 'Password34',
+            firstName: 'John',
+            lastName: 'Doe',
+        });
+        return await newUser.save();
 
-    return await newLesson.save();
+    } catch (error) {
+        console.error(`Error posting user: ${error}`);
+    }
+
 }
 
 module.exports = {
     setup,
-    postLesson
+    postLesson,
+    postUser
 };

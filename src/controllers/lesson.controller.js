@@ -73,7 +73,6 @@ const deleteLesson = async (req, res) => {
         message: "Lesson not found",
       });
     }
-
     await Lessons.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Lesson deleted" });
   } catch (error) {

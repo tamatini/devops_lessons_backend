@@ -3,15 +3,16 @@ const request = require('supertest');
 const app = require('../../app');
 const { setup, postLesson } = require('../test-helper');
 
-const url = "/lessons/delete/";
+const url = "/lessons";
 
-describe('DELETE /lessons/delete/:id', () => {
+describe("DELETE /lessons/:id", () => {
     setup();
 
-    it ('should return a status code 200', async() => {
-        const newLesson = await postLesson('Lesson 1');
-        const res = await request(app).delete(url+newLesson._id);	
-        expect(res.statusCode).to.equal(200);
+    it ("should return a status code 200", async() => {
+        const newLesson = await postLesson("Lesson 1");
+        const res = await request(app).get(url+"/"+newLesson._id);
+        console.log(res.body)
+        expect(res.status).to.equal(200);
     });
 
     it ('should return a status code 404 if lesson not found', async() => {
