@@ -1,6 +1,4 @@
 const database = require('../src/database/connect.database');
-const Lesson = require('../src/models/lesson.model');
-const User = require('../src/models/user.model');
 
 const setup = () => {
     before(async () => {
@@ -10,16 +8,15 @@ const setup = () => {
             console.error(`Error connecting to in-memory database: ${error}`);
         }
     })
-
-
-    beforeEach(async () => {
+    
+    afterEach(async () => {
         try {
             await database.clearDatabase();
         } catch (error) {
             console.error(`Error clearing database: ${error}`);
         }
     })
-
+    
     after(async () => {
         try {
             await database.close();
@@ -30,6 +27,7 @@ const setup = () => {
 };
 
 const postLesson = async (lesson) => {
+    const Lesson = require('../src/models/lesson.model');
     try {
         const newLesson = new Lesson({
             title: lesson,
@@ -37,13 +35,13 @@ const postLesson = async (lesson) => {
             isPublished: false
         });
         return await newLesson.save();
-
     } catch (error) {
         console.error(`Error posting lesson: ${error}`);
     }
 }
 
 const postUser = async () => {
+    const User = require('../src/models/user.model');
     try {
         const newUser = new User({
             username: 'JohnDoe',

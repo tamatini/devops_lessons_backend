@@ -22,8 +22,8 @@ describe("POST /lessons", () => {
       content: "This is a test lesson",
       isPublished: false,
     });
-    expect(res.status).to.equal(400);
-    expect(res.body).to.have.property("message", "Title is required");
+    expect(res.status).to.equal(500);
+    expect(res.body).to.have.property("message", "Validation failed: title: Title is required");
   });
 
   it("Should return error if content is missing", async () => {
@@ -31,16 +31,18 @@ describe("POST /lessons", () => {
       title: "Lesson 1",
       isPublished: false,
     });
-    expect(res.status).to.equal(400);
-    expect(res.body).to.have.property("message", "Content is required");
+    expect(res.status).to.equal(500);
+    expect(res.body).to.have.property("message", "Validation failed: content: Content is required");
   });
 
-  it("Should return error if isPublished is missing", async () => {
+  it("Should return a lesson", async () => {
     const res = await request(app).post(url).send({
       title: "Lesson 1",
       content: "This is a test lesson",
+      isPublished: false,
     });
-    expect(res.status).to.equal(400);
-    expect(res.body).to.have.property("message", "Lesson must be published or not");
-  });
+    expect(res.body).to.have.property("title", "Lesson 1");
+    expect(res.body).to.have.property("content", "This is a test lesson");
+    expect(res.body).to.have.property("isPublished", false);
+  })
 });

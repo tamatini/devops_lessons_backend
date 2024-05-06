@@ -11,7 +11,6 @@ describe("GET /lessons/:id", () => {
     it ('should return status code 200', async() => {
         const newLesson = await postLesson("Lesson 1");
         const res = await request(app).get(url+"/"+newLesson._id);
-        console.log(res.body)
         expect(res.status).to.equal(200);
     });
 
