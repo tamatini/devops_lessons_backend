@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: [true, 'Email is already taken'],
+        required: [true, 'Email is required'],
     },
     password: {
         type: String,
@@ -23,10 +24,12 @@ const userSchema = new mongoose.Schema({
         default: 'user'
     },
     firstName: {
-        type: String
+        type: String,
+        required: [true, 'Firstname is required']
     },
     lastName: {
-        type: String
+        type: String,
+        required: [true, 'Lastname is required']
     },
     avatar: {
         type: String
