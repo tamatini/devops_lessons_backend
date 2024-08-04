@@ -41,8 +41,34 @@ const postUser = async (req, res) => {
     }
 }
 
+const updateUser = async(req, res) => {
+    try {
+        const user = await User.findById(req?.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const { firstName, lastName } = req?.body;
+        !firstName && res.status(400).json({ message: 'Firstname is required' });
+        !lastName && res.status(400).json({ message: 'Lastname is required' });
+        await User.updateOne({ _id: req?.params.id }, 
+            {
+                $set: {
+                    firstName: req?.body.firstName,
+                    lastName: req?.body.lastName
+                }
+            }
+        );
+        res.status(201).json({ message: 'User has been updated' });
+    } catch(err) {
+        res.status(500).json({ message: error });
+    }
+} 
+
+
+
 module.exports = {
     getUsers,
     getSingleUser,
-    postUser
+    postUser,
+    updateUser
 };
