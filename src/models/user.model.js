@@ -11,12 +11,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: [true, 'Email is already taken'],
         required: [true, 'Email is required'],
+        validate: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email is invalid']
     },
     password: {
         type: String,
         required: [true, 'Password is required'],
         min: [6, 'Password must be at least 6 characters long'],
-        RegExp: [/^[a-zA-Z0-9]{6,}$/, 'Password must contain only letters and numbers']
+        validate: [/^[a-zA-Z0-9]{6,}$/, 'Password must contain only letters and numbers']
     },
     role: {
         type: String,
@@ -47,6 +48,7 @@ userSchema.pre('save', async function save() {
 
 userSchema.methods.comparePassword = async (password, hashedPassword) => {
     try {
+        console.log("here")
         return await bcrypt.compare(password, hashedPassword);
     } catch (error) {
         throw new Error('Comparing failed', error);

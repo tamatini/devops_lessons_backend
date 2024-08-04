@@ -57,7 +57,7 @@ describe("POST /users", () => {
     it('should return error if password is missing', async() => {
         const res = await request(app).post(url).send({
             username: user.username,
-            email: user.password,
+            email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
         });
@@ -85,5 +85,17 @@ describe("POST /users", () => {
         });
         expect(res.status).to.equal(500);
         expect(res.body).to.have.property('message', 'Validation failed: lastName: Lastname is required');
+    })
+
+    it('should return error if email is invalid', async() => {
+        const res = await request(app).post(url).send({
+            username: user.username,
+            email: 'john.doe',
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName
+        });
+        expect(res.status).to.equal(500);
+        expect(res.body).to.have.property('message', 'Validation failed: email: Email is invalid');
     })
 });
